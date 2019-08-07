@@ -11,7 +11,8 @@ var registration_schema= mongoose.Schema({
                                 email:
                                 {
                                     type:String,
-                                    required:true
+                                    required:true,
+                                    unique: true
                                 },
                                 gender:
                                 {
@@ -58,6 +59,10 @@ var registration_schema= mongoose.Schema({
                                 {
                                     type:String,
                                     required:true
+                                },
+                                imageLocation:
+                                {
+                                    type: String
                                 }
 
                 

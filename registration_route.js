@@ -1,6 +1,8 @@
 // express routing
 var express= require('express');
 var reg_route= express.Router();
+var multer = require('multer')
+var upload = multer({ dest: 'public/photos/' });
 
 //path
 var path= require('path');
@@ -16,10 +18,11 @@ reg_route.get('/',(req,res)=>
 })
 
 //post request
-reg_route.post('/',async(req,res)=>
+reg_route.post('/', upload.single('avatar'), async(req,res)=>
 
     {try{
         console.log(req.body);
+        console.log(req.file);
         var register1= new register(); //object creation
          register1.name= req.body.name;
          register1.email= req.body.email;
@@ -33,6 +36,7 @@ reg_route.post('/',async(req,res)=>
            register1.bodyweight=req.body.bodyweight;
          register1.address=req.body.address;
          register1.contactno=req.body.contactno;
+         register1.imageLocation = req.file.filename;
           await register1.save();
           res.send("sucess");
     }
